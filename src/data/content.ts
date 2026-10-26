@@ -5,7 +5,7 @@ export const EMAIL = "consult@zaherdassouky.com"
 // Paste the endpoint from a Formspree form here (https://formspree.io/f/xxxxxxxx)
 // to have the contact form send requests directly. While empty, the form
 // falls back to opening the visitor's email app.
-export const FORM_ENDPOINT = ""
+export const FORM_ENDPOINT = "https://formspree.io/f/mkjjjjge"
 export const LINKEDIN_URL = "https://www.linkedin.com/in/zaher-dassouky-613b6a20/"
 
 export const hero = {
