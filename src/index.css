@@ -1,0 +1,302 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@theme inline {
+    --font-sans: 'Montserrat', system-ui, -apple-system, sans-serif;
+    --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    --font-heading: var(--font-serif);
+    --font-signature: 'Pinyon Script', cursive;
+
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --color-surface: var(--surface);
+
+    /* Deep navy — the dominant brand color. Muted and deliberate, not a
+       bright/flashy blue. Drives primary buttons, active states, rings. */
+    --color-navy-100: #E3EAF1;
+    --color-navy-300: #6389AD;
+    --color-navy-500: #2C5A85;
+    --color-navy-600: #1F425F;
+    --color-navy-700: #173248;
+
+    /* Petrol green — the sparing accent. Kept out of shadcn's structural
+       "accent" role (used for hover/highlight washes) so it stays a
+       deliberate, occasional highlight rather than a UI-wide tint. */
+    --color-petrol-100: #DCEAE7;
+    --color-petrol-300: #84B1AB;
+    --color-petrol-500: #1E4B45;
+    --color-petrol-600: #153B36;
+    --color-petrol-700: #0E2926;
+
+    --color-success: #16A34A;
+    --color-error: #DC2626;
+
+    --radius-sm: 0.125rem;
+    --radius-md: 0.25rem;
+    --radius-lg: var(--radius);
+    --radius-xl: 0.5rem;
+    --radius-pill: 9999px;
+}
+
+/* Zaher Dassouky — Middle East Brand & Growth Advisory
+   Brand tokens sourced from /docs/brand-guidelines.md and
+   /assets/design-tokens.json at the project root. */
+:root {
+    --background: #F7F7F5;
+    --foreground: #0C0F12;
+    --surface: #FFFFFF;
+    --card: #FFFFFF;
+    --card-foreground: #0C0F12;
+    --popover: #FFFFFF;
+    --popover-foreground: #0C0F12;
+
+    --primary: #2C5A85;
+    --primary-foreground: #FFFFFF;
+
+    --secondary: #0C0F12;
+    --secondary-foreground: #FFFFFF;
+
+    --muted: #E2E4E2;
+    --muted-foreground: #5A5F63;
+
+    /* structural hover/highlight wash — quiet, not the accent color */
+    --accent: #EDEFEE;
+    --accent-foreground: #0C0F12;
+
+    --destructive: #DC2626;
+    --border: #E2E4E2;
+    --input: #E2E4E2;
+    --ring: #2C5A85;
+
+    --radius: 0.25rem;
+
+    --sidebar: #FFFFFF;
+    --sidebar-foreground: #0C0F12;
+    --sidebar-primary: #2C5A85;
+    --sidebar-primary-foreground: #FFFFFF;
+    --sidebar-accent: #EDEFEE;
+    --sidebar-accent-foreground: #0C0F12;
+    --sidebar-border: #E2E4E2;
+    --sidebar-ring: #2C5A85;
+}
+
+/* Used as a scoped wrapper class on deliberate full-bleed dark "moments"
+   (hero, the ENTER/BUILD/GROW section) — not a user-toggled site-wide
+   dark mode. Ground is a navy-black, not pure black, so it visually ties
+   the "black" and "blue" parts of the palette together. */
+.dark {
+    --background: #14293D;
+    --foreground: #F2F3F1;
+    --surface: #1F425F;
+    --card: #1F425F;
+    --card-foreground: #F2F3F1;
+    --popover: #1F425F;
+    --popover-foreground: #F2F3F1;
+
+    --primary: #FFFFFF;
+    --primary-foreground: #0C0F12;
+
+    --secondary: #1C3A54;
+    --secondary-foreground: #F2F3F1;
+
+    --muted: #1A3348;
+    --muted-foreground: #A9B7C4;
+
+    --accent: #1A3348;
+    --accent-foreground: #84B1AB;
+
+    --destructive: #EF4444;
+    --border: #2A4A66;
+    --input: #2A4A66;
+    --ring: #1E4B45;
+
+    --sidebar: #1F425F;
+    --sidebar-foreground: #F2F3F1;
+    --sidebar-primary: #FFFFFF;
+    --sidebar-primary-foreground: #0C0F12;
+    --sidebar-accent: #1A3348;
+    --sidebar-accent-foreground: #84B1AB;
+    --sidebar-border: #2A4A66;
+    --sidebar-ring: #1E4B45;
+}
+
+@keyframes gentle-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.12); }
+}
+.animate-gentle-pulse {
+  animation: gentle-pulse 3.2s ease-in-out infinite;
+  transform-origin: center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-gentle-pulse { animation: none; }
+}
+
+@keyframes map-drift {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(-1%, 1.2%) rotate(0.6deg); }
+}
+
+@keyframes signal-travel {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -42; }
+}
+
+/* Service orbit diagram — hub, spokes and nodes cascade in together. */
+@keyframes orbit-line-draw {
+  from { stroke-dashoffset: 1; opacity: 0; }
+  15% { opacity: 1; }
+  to { stroke-dashoffset: 0; opacity: 1; }
+}
+@keyframes orbit-node-in {
+  from { opacity: 0; transform: scale(0.4); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes orbit-hub-in {
+  from { opacity: 0; transform: scale(0.7); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes orbit-ring-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-orbit-ring-spin {
+  animation: orbit-ring-spin 90s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-orbit-ring-spin { animation: none; }
+}
+
+/* Ambient petrol glow around the header pill — always running, so the
+   header has visible life at rest, not only when scrolling. */
+@keyframes header-glow-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.04); }
+}
+.animate-header-glow-pulse {
+  animation: header-glow-pulse 4.5s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-header-glow-pulse { animation: none; }
+}
+
+/* Hero section background — solid navy that fades to white at the
+   bottom, timed to match where the map image's own baked-in fade
+   resolves. The map box sits at bottom:0 with height 50% (mobile) /
+   80% (sm+), so its top edge is at 50%/20% of the hero; the image's own
+   fade runs from 55% to 95% of its (fully visible) height, which lands
+   at 50+0.55×50=77.5% to 50+0.95×50=97.5% of the hero on mobile, and
+   20+0.55×80=64% to 20+0.95×80=96% on sm+. Two breakpoints because the
+   box's own height ratio changes, not just cosmetic tuning. */
+.hero-fade-bg {
+  background: linear-gradient(to bottom, #14293D 0%, #14293D 77.5%, #F7F7F5 97.5%, #F7F7F5 100%);
+}
+@media (min-width: 640px) {
+  .hero-fade-bg {
+    background: linear-gradient(to bottom, #14293D 0%, #14293D 64%, #F7F7F5 96%, #F7F7F5 100%);
+  }
+}
+
+/* White wash sitting above both the map image and hero-fade-bg. Spans
+   the full hero (same coordinate space as hero-fade-bg) and uses the
+   identical stop percentages, just transparent instead of navy for the
+   "before" color — guarantees the two stay aligned by construction
+   rather than by matching two separately-tuned gradients. */
+.hero-fade-overlay {
+  background: linear-gradient(to bottom, transparent 0%, transparent 77.5%, rgba(247,247,245,0.9) 97.5%, #F7F7F5 100%);
+}
+@media (min-width: 640px) {
+  .hero-fade-overlay {
+    background: linear-gradient(to bottom, transparent 0%, transparent 64%, rgba(247,247,245,0.9) 96%, #F7F7F5 100%);
+  }
+}
+
+/* Hero load sequence — the mark materializes first and settles into
+   place, then the content cascades in beneath it. One orchestrated
+   moment, not scattered effects. */
+@keyframes hero-mark-in {
+  from { opacity: 0; transform: scale(0.92) translateY(-6px); }
+  to { opacity: 0.08; transform: scale(1) translateY(0); }
+}
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-hero-mark-in {
+  opacity: 0.08;
+  animation: hero-mark-in 1.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.animate-hero-rise {
+  animation: hero-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-mark-in { animation: none; opacity: 0.08; }
+  .animate-hero-rise { animation: none; }
+}
+
+/* Header settles down into place on load instead of just being there. */
+@keyframes header-drop-in {
+  0% { opacity: 0; transform: translateY(-34px) scale(0.97); }
+  60% { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-header-drop-in {
+  animation: header-drop-in 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 100ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-header-drop-in { animation: none; }
+}
+
+::selection {
+  background-color: var(--color-petrol-300, #84B1AB);
+  color: #FFFFFF;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+  h1, h2, h3, h4 {
+    @apply font-serif;
+  }
+}
