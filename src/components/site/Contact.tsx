@@ -12,12 +12,15 @@ export function Contact() {
   const [name, setName] = useState("")
   const [company, setCompany] = useState("")
   const [email, setEmail] = useState("")
+  const [phone, setPhone] = useState("")
   const [message, setMessage] = useState("")
   const [honeypot, setHoneypot] = useState("")
   const [touched, setTouched] = useState(false)
   const [status, setStatus] = useState<Status>("idle")
 
-  const isValid = name.trim() && email.trim().includes("@") && message.trim()
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim())
+  const phoneValid = !phone.trim() || (/^[+\d][\d\s().-]{5,}$/.test(phone.trim()) && phone.replace(/\D/g, "").length >= 7)
+  const isValid = name.trim() && emailValid && phoneValid && message.trim()
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
@@ -32,6 +35,7 @@ export function Contact() {
         `Name: ${name}`,
         company ? `Company: ${company}` : null,
         `Email: ${email}`,
+        phone ? `Phone: ${phone}` : null,
         "",
         message,
       ]
@@ -46,13 +50,14 @@ export function Contact() {
       const res = await fetch(FORM_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ name, company, email, message, _subject: subject }),
+        body: JSON.stringify({ name, company, email, phone, message, _subject: subject }),
       })
       if (!res.ok) throw new Error("Request failed")
       setStatus("sent")
       setName("")
       setCompany("")
       setEmail("")
+      setPhone("")
       setMessage("")
       setTouched(false)
     } catch {
@@ -107,18 +112,35 @@ export function Contact() {
             </div>
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              autoComplete="email"
-            />
-            {touched && !email.trim().includes("@") && (
-              <p className="text-xs text-destructive">Enter a valid email so I can reply.</p>
-            )}
+          <div className="grid gap-5 sm:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                autoComplete="email"
+              />
+              {touched && !emailValid && (
+                <p className="text-xs text-destructive">Enter a valid email so I can reply.</p>
+              )}
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="phone">
+                Phone <span className="font-normal text-muted-foreground">(optional)</span>
+              </Label>
+              <Input
+                id="phone"
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                autoComplete="tel"
+              />
+              {touched && !phoneValid && (
+                <p className="text-xs text-destructive">Check the phone number, or leave it blank.</p>
+              )}
+            </div>
           </div>
 
           <div className="space-y-2">
